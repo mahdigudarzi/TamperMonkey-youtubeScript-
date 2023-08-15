@@ -1,0 +1,36 @@
+
+// ==UserScript==
+// @name         Pause YouTube on Tab Switch (with Full Screen support)
+// @namespace    http://tampermonkey.net/
+// @version      2.0
+// @description  Pause YouTube videos when switching to a different tab, and exit full screen mode
+// @match        https://www.youtube.com/*
+// @grant        none
+// ==/UserScript==
+
+var video = document.querySelector('video');
+
+window.addEventListener('blur', function() {
+
+    if (!video.paused) {
+         video.pause();
+    }
+});
+
+window.addEventListener('focus', function() {
+    if ( video.paused) {
+        video.play();
+    }
+});
+
+window.addEventListener('fullscreenchange' , 'blur', function() {
+
+    if (!video.paused) {
+         video.pause();
+    }
+});
+window.addEventListener( "fullscreenchange", 'focus', function() {
+    if ( video.paused) {
+        video.play();
+    }
+});
